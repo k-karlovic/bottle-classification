@@ -24,10 +24,10 @@ Classification of cans, plastic, and glass bottles using feature extraction and 
 ## Data set collection and manipulation
 
 &nbsp;
-### Algorithms for extracting image features
+## Algorithms for extracting image features
 
 &nbsp;
-### Support vector machine
+## Support vector machine
 
 &nbsp;
 ## Conclusion
