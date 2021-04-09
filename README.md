@@ -76,7 +76,7 @@ To better train the model, it is necessary to increase the data set. This is ach
   <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/?raw=true"/>
 </p>
 <p align="center"><i>
-  Figure 4 Image of a rotated bottle
+  Figure 4 Rotated bottle
 </i></p>
 <br />
 The `cv2.fastNlMeansDenoising()` function is used to reduce noise. The function requires the original image and parameters for filter strength, templateWindowSize (recommended 7) and searchWindowSize (recommended 21). The result of reduced noise is visible in Figure 5.
@@ -85,7 +85,7 @@ The `cv2.fastNlMeansDenoising()` function is used to reduce noise. The function 
   <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/?raw=true"/>
 </p>
 <p align="center"><i>
-  Figure 5 Image with reduced noise
+  Figure 5 Reduced noise
 </i></p>
 <br />
 The function `cv2.medianBlur()` is used for blurring, which requires the original image and the parameter for blurring strength. Figure 6 shows the result of image blurring.
@@ -94,7 +94,7 @@ The function `cv2.medianBlur()` is used for blurring, which requires the origina
   <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/?raw=true"/>
 </p>
 <p align="center"><i>
-  Figure 6 Image blur
+  Figure 6 Blurring
 </i></p>
 <br />
 After rotating, reducing noise, and blurring the images, a data set of 496 cans, 144 glass, and 7543 plastic bottles were obtained. Image manipulation scripts are attached under `rotation.py`, `noise_reduction.py`, and `blurring.py`.
@@ -239,9 +239,36 @@ Table 1 shows the number of features found on the plastic bottle and the time re
 <p align="center"><i>
   Table 1 Number of features and time required for feature extraction
 </i></p>
-<p align="center">
-  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/?raw=true"/>
-</p>
+
+<div class="center">
+<table>
+    <thead>
+        <tr>
+            <th align="center">Feature extraction algorithms</th>
+            <th align="center">Number of key points</th>
+            <th align="center">Algorithm time [s]</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th align="center">SIFT</th>
+            <th align="center">94</th>
+            <th align="center">90.105</th>
+        </tr>
+        <tr>
+            <th align="center">SURF</th>
+            <th align="center">162</th>
+            <th align="center">0.256</th>
+        </tr>
+        <tr>
+            <th align="center">ORB</th>
+            <th align="center">467</th>
+            <th align="center">0.241</th>
+        </tr>
+    </tbody>
+</table>
+</div>
+
 <br />
 The ORB algorithm is faster than the SIFT algorithm, but because it has found more features it also takes more time.
 
