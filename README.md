@@ -22,19 +22,23 @@ In this project, cans and bottles need to be classified using feature extraction
   - Open Git Bash 
   - Change the directory to the location wehere you want clone the directory
   - Type git clone https://github.com/k-karlovic/bottle-classification.git
+<br />
 
 ### 2. Download the data set
   - Go to [https://www.dropbox.com/s/0luqxkj0axpgsxo/bottles.zip?dl=0](https://www.dropbox.com/s/0luqxkj0axpgsxo/bottles.zip?dl=0)
   - Dwnload the data set
   - Unzip the file
+<br />
 
 ### 3.  Install Requirements
 * [Python](https://www.python.org/downloads/)
 
 To install the necessary packages in python run **`pip install -r requirements.txt`**.
+<br />
 
 ### 4. Run the `data_set_preparation.py` script
 Run the `data_set_preparation.py` script to save the data set in pickle format.
+<br />
 
 ### 5. Run the `svmn.py` script
 Run the `svmn.py` script to train and test the SVM model.
