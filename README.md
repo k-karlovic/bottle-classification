@@ -89,6 +89,7 @@ To better train the model, it is necessary to increase the data set. This is ach
 
 The `cv2.fastNlMeansDenoising()` function is used to reduce noise. The function requires the original image and parameters for filter strength, templateWindowSize (recommended 7) and searchWindowSize (recommended 21). The result of reduced noise is visible in Figure 5.
 <br />
+<br />
 <p align="center">
   <img width="60%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/reduced_noise.jpg?raw=true"/>
 </p>
@@ -97,7 +98,7 @@ The `cv2.fastNlMeansDenoising()` function is used to reduce noise. The function 
 </i></p>
 <br />
 The function `cv2.medianBlur()` is used for blurring, which requires the original image and the parameter for blurring strength. Figure 6 shows the result of image blurring.
-
+<br />
 <br />
 <p align="center">
   <img width="60%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/blurring.jpg?raw=true"/>
@@ -121,6 +122,7 @@ The image feature extraction algorithms used in this project are:
 ### SIFT
 
 The code below extracts the features from the images with the SIFT algorithm:
+
 
     # Adding modules
     import cv2
@@ -146,6 +148,7 @@ The code below extracts the features from the images with the SIFT algorithm:
     plt.imshow(img)
     plt.show()
 
+
 The `cv2.xfeatures2d.SIFT_create()` function is used to invoke / create the SIFT algorithm. The `sift.detect()` function finds key points in images. Each key point is a special structure that has many attributes such as its coordinates (x, y), the size of a significant neighborhood, the angle that determines its orientation, the response that indicates the strength of key points, etc. The `cv.drawKeyPoints()` function draws small circles at key points. If the `cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS` function is added, it will draw a circle with the size of the key point and show the orientation. The SIFT algorithm found 94 key points which are shown in Figure 7.
 
 <br />
@@ -160,6 +163,7 @@ The `cv2.xfeatures2d.SIFT_create()` function is used to invoke / create the SIFT
 ### SURF
 
 The code below extracts the features of the images with the SURF algorithm:
+
 
     # Adding modules
     import cv2
@@ -185,6 +189,7 @@ The code below extracts the features of the images with the SURF algorithm:
     plt.imshow(img)
     plt.show()
 
+
 The `cv2.xfeatures2d.SURF_create()` function is used to invoke / create the SURF algorithm. The `surf.detect()` function finds key points in images. Each key point is a special structure that has many attributes such as its coordinates (x, y), the size of a significant neighborhood, the angle that determines its orientation, the response that indicates the strength of key points, etc. Function `cv.drawKeyPoints()` draws small circles at the locations of key points. If the `cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS` function is added, it will draw a circle with the size of the key point and show the orientation. The SURF algorithm found 162 key points shown in Figure 8.
 
 <br />
@@ -198,7 +203,7 @@ The `cv2.xfeatures2d.SURF_create()` function is used to invoke / create the SURF
 
 ### ORB
 The code below extracts the features of the images with the ORB algorithm:
-<br />
+
 
     # Adding modules
     import cv2
@@ -224,9 +229,9 @@ The code below extracts the features of the images with the ORB algorithm:
     plt.imshow(img)
     plt.show()
 
-<br />
-The `cv2.ORB_create()` function is used to invoke/create the ORB algorithm. The `orb.detect()` function finds key points in images. Each key point is a special structure that has many attributes such as its coordinates (x, y), the size of a significant neighborhood, the angle that determines its orientation, the response that indicates the strength of key points, etc. Function `cv.drawKeyPoints()` draws small circles at the locations of key points. The ORB algorithm found 467 key points shown in Figure 9.
 
+The `cv2.ORB_create()` function is used to invoke/create the ORB algorithm. The `orb.detect()` function finds key points in images. Each key point is a special structure that has many attributes such as its coordinates (x, y), the size of a significant neighborhood, the angle that determines its orientation, the response that indicates the strength of key points, etc. Function `cv.drawKeyPoints()` draws small circles at the locations of key points. The ORB algorithm found 467 key points shown in Figure 9.
+<br />
 <br />
 <p align="center">
   <img width="70%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/extraction_of_features_by_ORB_algorithm.jpg?raw=true"/>
@@ -298,6 +303,7 @@ The system for the classification of cans and bottles using the extraction of fe
 * preparation of a data set,
 * feature extraction and
 * training and testing of features by SVM algorithm.
+<br />
 
 ### Preparation of a data set
 
@@ -355,6 +361,7 @@ The project uses 3 algorithms for extracting features, as in Chapter “4. Algor
 * SIFT,
 * SURF i
 * ORB.
+<br />
 
 #### SIFT
 
@@ -368,7 +375,7 @@ The code below was used to extract the features of all the images in the data se
       # Determining the number of features and features
       kp, des = sift.detectAndCompute(img,None)
       return kp, des
-
+<br />
 
 #### SURF
 
@@ -382,7 +389,7 @@ The code below was used to extract the features of all the images in the data se
       # Determining the number of features and features
       kp, des = surf.detectAndCompute(img,None)
       return kp, des
-
+<br />
 
 #### ORB
 
@@ -396,10 +403,11 @@ The code below was used to extract the features of all the images in the data se
       # Determining the number of features and features
       kp, des = orb.detectAndCompute(img,None)
       return kp, des
-
+<br />
+<br />
 
 The input must be the same size to train the SVM model, which means that the number of features for each image should be the same. This will be achieved by the following code:
-
+<br />
 
     def feature_number(feature):
       """Creating a list with the features of individual images, and returning list_data and ind"""
@@ -427,38 +435,39 @@ The input must be the same size to train the SVM model, which means that the num
       features = ['sift', 'surf', 'orb']
       print("Algorithm time: %0.3fs" % (time() - t0))
       return list_data, ind
-
+<br />
 
 The code only accepts images that have more than 20 features.
-
+<br />
 
     if len(kp) < 20:
       continue
-
+<br />
 
 Only the first 20 features that are added to the list are taken.
-
+<br />
 
     des = des[0:20,:]
-
+<br />
 
 Before training and testing features with the SVM algorithm, it is necessary to divide the features into trained and tested data. This means that 70% of the images will be a training set and 30% a test set.
-
+<br />
 
     # Division of dataset into trained and tested data
     X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.3, random_state=42)
-
+<br />
 
 ### Training and testing of features by SVM algorithm
 
 For training, it is necessary to determine parameters, such as the core and parameters C and γ. There are two variants:
 * self-testing with different parameters or
 * use the "GridSearchCV()" function - automatic search.
+<br />
 
 #### GridSearchCV()
 
 The following code shows the procedure for using the "GridSearchCV ()" function, which throws out clf.best_estimator_ as a result of the best parameters.
-
+<br />
 
     def svm_parameters(X_train, y_train):
       """Finding parameters for model training and returning clf.best_estimator_"""
@@ -472,37 +481,36 @@ The following code shows the procedure for using the "GridSearchCV ()" function,
       clf = clf.fit(X_train, y_train)
       print("Parameter finding time: %0.3fs" % (time() - t0))
       return clf.best_estimator_
-
+<br />
 
 It is defined for which training and testing algorithm "svm.SVC()" is used, and parameter ranges are defined.
-
+<br />
 
     # Parameters
       param_grid = {'C': [1e2, 1e3, 5e3, 1e4, 5e4, 1e5],
                   'gamma': [0.0001, 0.001, 0.01, 0.1], 
                   'kernel': ['linear', 'poly', 'rbf', 'sigmoid']}
-
+<br />
 
 The time to find the best parameters took more than 5 days. The results obtained are:
-
+<br />
 
     clf = svm.SVC(C=1000, cache_size=200, class_weight='balanced', coef0=0.0, decision_function_shape='ovr', 
                   degree=3, gamma=1e-4, kernel='rbf', max_iter=-1, probability=False, random_state=None, 
                   shrinking=True, tol=0.001, verbose=False)
 
-
+<br />
 Parameter C did not reach the minimum number given, but gamma did, which means that it is necessary to check whether the gamma less than 0.0001 gives better results. After checking, it was obtained that gamma = 1e-8 gives the best result:
-
+<br />
 
     clf = svm.SVC(C=1000, cache_size=200, class_weight='balanced', coef0=0.0, decision_function_shape='ovr', 
                   degree=3, gamma=1e-8, kernel='rbf', max_iter=-1, probability=False, random_state=None, 
                   shrinking=True, tol=0.001, verbose=False)
-
+<br />
 
 #### Testing
 
 The accuracy of the trained model is always higher than the tested one because during testing the model tests with new input data. The clf.predict (X_test) command is used for testing to obtain the model accuracy percentage. The result can be displayed through the accuracy or precision of the model.
-
 
 &nbsp;
 ## Conclusion
