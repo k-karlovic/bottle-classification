@@ -141,6 +141,8 @@ The image feature extraction algorithms used in this project are:
 * SURF (Speeded-Up Robust Features) and
 * ORB (Oriented FAST and Rotated BRIEF).
 
+<br />
+
 ### SIFT
 
 The code below extracts the features from the images with the SIFT algorithm:
