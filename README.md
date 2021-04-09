@@ -122,7 +122,7 @@ The image feature extraction algorithms used in this project are:
 ### SIFT
 
 The code below extracts the features from the images with the SIFT algorithm:
-
+<br />
 
     # Adding modules
     import cv2
@@ -147,7 +147,7 @@ The code below extracts the features from the images with the SIFT algorithm:
     # Image display
     plt.imshow(img)
     plt.show()
-
+<br />
 
 The `cv2.xfeatures2d.SIFT_create()` function is used to invoke / create the SIFT algorithm. The `sift.detect()` function finds key points in images. Each key point is a special structure that has many attributes such as its coordinates (x, y), the size of a significant neighborhood, the angle that determines its orientation, the response that indicates the strength of key points, etc. The `cv.drawKeyPoints()` function draws small circles at key points. If the `cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS` function is added, it will draw a circle with the size of the key point and show the orientation. The SIFT algorithm found 94 key points which are shown in Figure 7.
 
@@ -163,7 +163,7 @@ The `cv2.xfeatures2d.SIFT_create()` function is used to invoke / create the SIFT
 ### SURF
 
 The code below extracts the features of the images with the SURF algorithm:
-
+<br />
 
     # Adding modules
     import cv2
@@ -188,7 +188,7 @@ The code below extracts the features of the images with the SURF algorithm:
     # Image display
     plt.imshow(img)
     plt.show()
-
+<br />
 
 The `cv2.xfeatures2d.SURF_create()` function is used to invoke / create the SURF algorithm. The `surf.detect()` function finds key points in images. Each key point is a special structure that has many attributes such as its coordinates (x, y), the size of a significant neighborhood, the angle that determines its orientation, the response that indicates the strength of key points, etc. Function `cv.drawKeyPoints()` draws small circles at the locations of key points. If the `cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS` function is added, it will draw a circle with the size of the key point and show the orientation. The SURF algorithm found 162 key points shown in Figure 8.
 
@@ -203,7 +203,7 @@ The `cv2.xfeatures2d.SURF_create()` function is used to invoke / create the SURF
 
 ### ORB
 The code below extracts the features of the images with the ORB algorithm:
-
+<br />
 
     # Adding modules
     import cv2
@@ -228,7 +228,7 @@ The code below extracts the features of the images with the ORB algorithm:
     # Image display
     plt.imshow(img)
     plt.show()
-
+<br />
 
 The `cv2.ORB_create()` function is used to invoke/create the ORB algorithm. The `orb.detect()` function finds key points in images. Each key point is a special structure that has many attributes such as its coordinates (x, y), the size of a significant neighborhood, the angle that determines its orientation, the response that indicates the strength of key points, etc. Function `cv.drawKeyPoints()` draws small circles at the locations of key points. The ORB algorithm found 467 key points shown in Figure 9.
 <br />
@@ -310,7 +310,7 @@ The system for the classification of cans and bottles using the extraction of fe
 The collected data set (Chapter “2. Data collection and manipulation) needs to be prepared for the extraction algorithm. Each image is loaded with the "cv2.imread ()" function and reduced with the "cv2.resize ()" function. 320x240 images are saved in sheet X and the class index (0 for glass bottles, 1 for plastic bottles and 2 for cans) is saved in sheet Y. Lists X and Y are saved using the "pickle.dump ()" function in X files .pickle and Y.pickle. The code for preparing the data set is attached as "Preparation of DataSet.py".
 
 The following code displays the images as input data in the form of dots, as shown in Figure 6.1.
-
+<br />
 
     # Adding modules
     import cv2
@@ -344,9 +344,9 @@ The following code displays the images as input data in the form of dots, as sho
     # Saving the graph
     plt.savefig('input_datai.jpg')
     plt.show()
-
-
 <br />
+
+
 <p align="center">
   <img width="70%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/input_data.jpg?raw=true"/>
 </p>
