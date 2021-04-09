@@ -342,7 +342,7 @@ Support Vector Machines (SVMs) are supervised machine learning algorithms that a
 <br />
 
 <p align="center">
-  <img width="70%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/svm.png?raw=true"/>
+  <img width="60%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/svm.png?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 11 Support Vector Machine
@@ -431,7 +431,7 @@ The following code displays the images as input data in the form of dots, as sho
 
 
 <p align="center">
-  <img width="70%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/input_data.jpg?raw=true"/>
+  <img width="60%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/input_data.jpg?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 12 Input data
