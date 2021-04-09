@@ -15,7 +15,7 @@ Classification of cans, plastic, and glass bottles using feature extraction and 
 
 &nbsp;
 ## Summary
-In this project, cans and bottles need to be classified using feature extraction. Classification is performed on cans, plastic, and glass bottles. The program is written in the Python programming language, and the main modules used for this project are OpenCV and scikitlearn. SIFT, SURF, and ORB algorithms are used to extract features on cans and bottles. The performance of ORB in feature detection is the same as with SIFT which means it is better than SURF and is faster by almost two orders of magnitude. The SVM algorithm is used to classify cans and bottles. The SVM algorithm tries to find the hyperplane with the largest possible margin between the support vectors. There are different kernels used by SVM algorithms, such as linear, RBF, and polynomial kernels.
+In this project, cans and bottles need to be classified using feature extraction. Classification is performed on cans, plastic, and glass bottles. The program is written in the Python programming language, and the main modules used for this project are OpenCV and scikit-learn. SIFT, SURF, and ORB algorithms are used to extract features on cans and bottles. The performance of ORB in feature detection is the same as with SIFT which means it is better than SURF and is faster by almost two orders of magnitude. The SVM algorithm is used to classify cans and bottles. The SVM algorithm tries to find the hyperplane with the largest possible margin between the support vectors. There are different kernels used by SVM algorithms, such as linear, RBF, and polynomial kernels.
 
 &nbsp;
 ## Setup
@@ -372,9 +372,9 @@ A kernel transforms a low-dimensional input data space into a higher dimensional
 
 Some types of kernels:
 
-* Linear kernel
-* Polynomial kernel
-* Radial Basis Function (RBF) kernel
+* Linear kernel,
+* Polynomial kernel and
+* Radial Basis Function (RBF) kernel.
 
 
 &nbsp;
@@ -388,7 +388,7 @@ The system for the classification of cans and bottles using the extraction of fe
 
 ### Preparation of a data set
 
-The collected data set (Chapter “2. Data collection and manipulation) needs to be prepared for the extraction algorithm. Each image is loaded with the "cv2.imread ()" function and reduced with the "cv2.resize ()" function. 320x240 images are saved in sheet X and the class index (0 for glass bottles, 1 for plastic bottles and 2 for cans) is saved in sheet Y. Lists X and Y are saved using the "pickle.dump ()" function in X files .pickle and Y.pickle. The code for preparing the data set is attached as "Preparation of DataSet.py".
+The collected data set (Chapters [Data collection](#data-collection) and [Data manipulation](#data-manipulation)) needs to be prepared for the extraction algorithm. Each image is loaded with the `cv2.imread()` function and reduced with the `cv2.resize()` function. 320x240 images are saved in list X and the class index (0 for glass bottles, 1 for plastic bottles and 2 for cans) is saved in list Y. Lists X and Y are saved using the `pickle.dump()` function in files X.pickle and Y.pickle. The code for preparing the data set is attached as `data_set_preparation.py`.
 
 The following code displays the images as input data in the form of dots, as shown in Figure 12.
 
@@ -441,9 +441,9 @@ The following code displays the images as input data in the form of dots, as sho
 
 ### Extraction features
 
-The project uses 3 algorithms for extracting features, as in Chapter “4. Algorithms for extracting image features " shown:
+The project uses 3 algorithms for extracting features, as in Chapter [Algorithms for extracting image features](#algorithms-for-extracting-image-features) shown:
 * SIFT,
-* SURF i
+* SURF and
 * ORB.
 
 <br />
@@ -560,13 +560,13 @@ Before training and testing features with the SVM algorithm, it is necessary to 
 
 For training, it is necessary to determine parameters, such as the core and parameters C and γ. There are two variants:
 * self-testing with different parameters or
-* use the "GridSearchCV()" function - automatic search.
+* use the `GridSearchCV()` function - automatic search.
 
 <br />
 
 #### GridSearchCV()
 
-The following code shows the procedure for using the "GridSearchCV ()" function, which throws out clf.best_estimator_ as a result of the best parameters.
+The following code shows the procedure for using the `GridSearchCV ()` function, which throws out clf.best_estimator_ as a result of the best parameters.
 
 <br />
 
@@ -585,7 +585,7 @@ The following code shows the procedure for using the "GridSearchCV ()" function,
 
 <br />
 
-It is defined for which training and testing algorithm "svm.SVC()" is used, and parameter ranges are defined.
+It is defined for which training and testing algorithm `svm.SVC()` is used, and parameter ranges are defined.
 
 <br />
 
@@ -618,11 +618,11 @@ Parameter C did not reach the minimum number given, but gamma did, which means t
 
 #### Testing
 
-The accuracy of the trained model is always higher than the tested one because during testing the model tests with new input data. The clf.predict (X_test) command is used for testing to obtain the model accuracy percentage. The result can be displayed through the accuracy or precision of the model.
+The accuracy of the trained model is always higher than the tested one because during testing the model tests with new input data. The `clf.predict(X_test)` command is used for testing to obtain the model accuracy percentage. The result can be displayed through the accuracy or precision of the model.
 
 &nbsp;
 ## Conclusion
-The project consists of collecting images to create a data set for training the SVM algorithm. The images were collected by photographing bottles and cans. The bottles were photographed with a cap, without a cap, with a label, and without a label in order to get as realistic a situation as possible. Plastic bottles were also subsequently heat-treated and photographed. The OpenCV image processing package in Python was used to increase the data set. In order to reduce the time required to train the model, feature extraction algorithms are used. There are different algorithms for extracting features, and SIFT, SURF, and ORB algorithms were used in the project. The performance of ORB in feature detection is the same as with SIFT which means it is better than SURF and is faster by almost two orders of magnitude. In Chapter “7. Comparison of the obtained results "using the function" GridSearchCV () "the optimal parameters are obtained. The RBF and polynomial cores with the SURF algorithm for finding features have the highest precision, the lowest training and testing times of SVM models. But the ORB algorithm has the least feature finding time, which also results in a faster classification of cans and bottles. Therefore, the best solution is offered by the ORB algorithm, which has an accuracy of 0.927 and 7 times shorter time compared to the SURF algorithm. The application of feature extraction algorithms directly results in a reduction in the time required to train the model.
+The project consists of collecting images to create a data set for training the SVM algorithm. The images were collected by photographing bottles and cans. The bottles were photographed with a cap, without a cap, with a label, and without a label in order to get as realistic a situation as possible. Plastic bottles were also subsequently heat-treated and photographed. The OpenCV image processing package in Python was used to increase the data set. In order to reduce the time required to train the model, feature extraction algorithms are used. There are different algorithms for extracting features, and SIFT, SURF, and ORB algorithms were used in the project. The performance of ORB in feature detection is the same as with SIFT which means it is better than SURF and is faster by almost two orders of magnitude. In Chapter [Comparison of the obtained results](#comparison-of-the-obtained-results) using the function `GridSearchCV()` the optimal parameters are obtained. The RBF and polynomial cores with the SURF algorithm for finding features have the highest precision, the lowest training and testing times of SVM models. But the ORB algorithm has the least feature finding time, which also results in a faster classification of cans and bottles. Therefore, the best solution is offered by the ORB algorithm, which has an accuracy of 0.927 and 7 times shorter time compared to the SURF algorithm. The application of feature extraction algorithms directly results in a reduction in the time required to train the model.
 
 &nbsp;
 ## Literature
