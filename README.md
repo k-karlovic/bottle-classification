@@ -337,6 +337,45 @@ The ORB algorithm is faster than the SIFT algorithm, but because it has found mo
 
 &nbsp;
 ## Support vector machine
+Support Vector Machines (SVMs) are supervised machine learning algorithms that are used for classification and regression purposes (Figure 11).
+
+<br />
+
+<p align="center">
+  <img width="70%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/svm.png?raw=true"/>
+</p>
+<p align="center"><i>
+  Figure 11 Support Vector Machine
+</i></p>
+
+<br />
+
+#### Hyperplane
+
+A hyperplane is a decision boundary which separates between given set of data points having different class labels. The SVM classifier separates data points using a hyperplane with the maximum amount of margin.
+
+#### Support vectors
+
+Support vectors are the sample data points, which are closest to the hyperplane.
+
+#### Margin
+
+A margin is a separation gap between the two lines on the closest data points. It is calculated as the perpendicular distance from the line to support vectors or closest data points.
+
+In SVMs, our main objective is to select a hyperplane with the maximum possible margin between support vectors in the given dataset. SVM searches for the maximum margin hyperplane in the following 2 step process:
+
+* Generate hyperplanes which segregates the classes in the best possible way. There are many hyperplanes that might classify the data. We should look for the best hyperplane that represents the largest separation, or margin, between the two classes.
+* So, we choose the hyperplane so that distance from it to the support vectors on each side is maximized. If such a hyperplane exists, it is known as the maximum margin hyperplane and the linear classifier it defines is known as a maximum margin classifier.
+
+#### Kernel
+A kernel transforms a low-dimensional input data space into a higher dimensional space. So, it converts non-linear separable problems to linear separable problems by adding more dimensions to it.
+
+Some types of kernels:
+
+* Linear kernel
+* Polynomial kernel
+* Radial Basis Function (RBF) kernel
+
 
 &nbsp;
 ## Cans and bottles classification model
@@ -351,7 +390,7 @@ The system for the classification of cans and bottles using the extraction of fe
 
 The collected data set (Chapter “2. Data collection and manipulation) needs to be prepared for the extraction algorithm. Each image is loaded with the "cv2.imread ()" function and reduced with the "cv2.resize ()" function. 320x240 images are saved in sheet X and the class index (0 for glass bottles, 1 for plastic bottles and 2 for cans) is saved in sheet Y. Lists X and Y are saved using the "pickle.dump ()" function in X files .pickle and Y.pickle. The code for preparing the data set is attached as "Preparation of DataSet.py".
 
-The following code displays the images as input data in the form of dots, as shown in Figure 6.1.
+The following code displays the images as input data in the form of dots, as shown in Figure 12.
 
 <br />
 
@@ -395,7 +434,7 @@ The following code displays the images as input data in the form of dots, as sho
   <img width="70%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/input_data.jpg?raw=true"/>
 </p>
 <p align="center"><i>
-  Figure 6.1 Input data
+  Figure 12 Input data
 </i></p>
 
 <br />
@@ -604,6 +643,8 @@ The project consists of collecting images to create a data set for training the 
 „Introduction to SURF (Speeded-Up Robust Features)“, https://opencvpythontutroals.readthedocs.io/en/latest/py_tutorials/py_feature2d/py_surf_intro/py_surf_intro.html
 
 „Introduction to ORB (Oriented FAST and Rotated BRIEF)“, https://medium.com/data-breach/introduction-to-orb-oriented-fast-and-rotated-brief-4220e8ec40cf
+
+„Support Vector Machines Classifier Tutorial with Python“, https://www.kaggle.com/prashant111/svm-classifier-tutorial
 
 Garreta R., Moncecchi G.: "Learning scikit-learn: Machine Learning in Python", Packt Publishing, UK, 2013.
 
