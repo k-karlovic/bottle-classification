@@ -49,7 +49,7 @@ Run the `data_set_preparation.py` script to save the data set in pickle format.
 Run the `svmn.py` script to train and test the SVM model.
 
 &nbsp;
-## Data set collection and manipulation
+## Data set collection
 The data set includes three different categories of items. About 300 cans, plastic, and glass bottles were collected. The bottles were photographed with a webcam from the same height on a white paper that served as a substrate (Figure 1).
 
 <br />
