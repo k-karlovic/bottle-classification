@@ -388,7 +388,7 @@ The system for the classification of cans and bottles using the extraction of fe
 
 ### Preparation of a data set
 
-The collected data set (Chapters [Data collection](#data-collection) and [Data manipulation](#data-manipulation)) needs to be prepared for the extraction algorithm. Each image is loaded with the `cv2.imread()` function and reduced with the `cv2.resize()` function. 320x240 images are saved in list X and the class index (0 for glass bottles, 1 for plastic bottles and 2 for cans) is saved in list Y. Lists X and Y are saved using the `pickle.dump()` function in files X.pickle and Y.pickle. The code for preparing the data set is attached as `data_set_preparation.py`.
+The collected data set (Chapters [Data set collection](#data-set-collection) and [Data set manipulation](#data-set-manipulation)) needs to be prepared for the extraction algorithm. Each image is loaded with the `cv2.imread()` function and reduced with the `cv2.resize()` function. 320x240 images are saved in list X and the class index (0 for glass bottles, 1 for plastic bottles and 2 for cans) is saved in list Y. Lists X and Y are saved using the `pickle.dump()` function in files X.pickle and Y.pickle. The code for preparing the data set is attached as `data_set_preparation.py`.
 
 The following code displays the images as input data in the form of dots, as shown in Figure 12.
 
