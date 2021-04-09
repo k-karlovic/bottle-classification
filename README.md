@@ -44,7 +44,7 @@ Run the `svmn.py` script to train and test the SVM model.
 The data set includes three different categories of items. About 300 cans, plastic, and glass bottles were collected. The bottles were photographed with a webcam from the same height on a white paper that served as a substrate (Figure 1).
 <br />
 <p align="center">
-  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/?raw=true"/>
+  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/plastic_bottle_taken_with_a_webcam.jpg?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 1 Plastic bottle taken with a webcam
@@ -53,7 +53,7 @@ The data set includes three different categories of items. About 300 cans, plast
 The cans and bottles need to be photographed from different angles because the camera cannot capture the whole bottle from the same position. This is achieved by having each bottle rotate around its axis and thus obtain images of the bottles from different angles. The aim is to automatically recognize the cans and bottles in any form it was in the environment, which is why plastic bottles are thermally processed and thus also receive a larger set of data (Figure 2).
 <br />
 <p align="center">
-  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/?raw=true"/>
+  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/heat-treated_bottles.jpg?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 2 Heat-treated bottles
@@ -62,7 +62,7 @@ The cans and bottles need to be photographed from different angles because the c
 The bottles were re-photographed from all angles, with a cap, without a cap, with a label, and without a label. It is necessary to obtain a set of data with real situations of returning bottles where the bottles can be, for example, with a cap or without a label. A script was created in Python to photograph the bottles, which immediately converts the images to black and white (Figure 3).
 <br />
 <p align="center">
-  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/?raw=true"/>
+  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/black_and_white_image_of_the_bottle.jpg?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 3 Black and white image of the bottle
@@ -73,7 +73,7 @@ The bottles were re-photographed from all angles, with a cap, without a cap, wit
 To better train the model, it is necessary to increase the data set. This is achieved by reducing noise, rotating, and blurring images. OpenCV is a package in Python that contains all these options. Images are rotated 90 degrees 3 times with the `cv2.getRotationMatrix2D()` and `cv2.warpAffine()` functions. The `cv2.getRotationMatrix2D()` function must contain the center around which it will rotate, at what angle, and whether the image remains the same or shrinks or increases. The `cv2.warpAffine()` function combines the `cv2.getRotationMatrix2D()` command with the original image and rotates the images. The image of the rotated bottle is visible in Figure 4.
 <br />
 <p align="center">
-  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/?raw=true"/>
+  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/rotated_bottle.jpg?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 4 Rotated bottle
@@ -82,7 +82,7 @@ To better train the model, it is necessary to increase the data set. This is ach
 The `cv2.fastNlMeansDenoising()` function is used to reduce noise. The function requires the original image and parameters for filter strength, templateWindowSize (recommended 7) and searchWindowSize (recommended 21). The result of reduced noise is visible in Figure 5.
 <br />
 <p align="center">
-  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/?raw=true"/>
+  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/reduced_noise.jpg?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 5 Reduced noise
@@ -91,7 +91,7 @@ The `cv2.fastNlMeansDenoising()` function is used to reduce noise. The function 
 The function `cv2.medianBlur()` is used for blurring, which requires the original image and the parameter for blurring strength. Figure 6 shows the result of image blurring.
 <br />
 <p align="center">
-  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/?raw=true"/>
+  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/blurring.jpg?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 6 Blurring
@@ -139,7 +139,7 @@ The code below extracts the features from the images with the SIFT algorithm:
 The `cv2.xfeatures2d.SIFT_create()` function is used to invoke / create the SIFT algorithm. The `sift.detect()` function finds key points in images. Each key point is a special structure that has many attributes such as its coordinates (x, y), the size of a significant neighborhood, the angle that determines its orientation, the response that indicates the strength of key points, etc. The `cv.drawKeyPoints()` function draws small circles at key points. If the `cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS` function is added, it will draw a circle with the size of the key point and show the orientation. The SIFT algorithm found 94 key points which are shown in Figure 7.
 <br />
 <p align="center">
-  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/?raw=true"/>
+  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/extraction_of_features_by_SIFT_algorithm.jpg?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 7 Extraction of features by SIFT algorithm
@@ -176,7 +176,7 @@ The code below extracts the features of the images with the SURF algorithm:
 The `cv2.xfeatures2d.SURF_create()` function is used to invoke / create the SURF algorithm. The `surf.detect()` function finds key points in images. Each key point is a special structure that has many attributes such as its coordinates (x, y), the size of a significant neighborhood, the angle that determines its orientation, the response that indicates the strength of key points, etc. Function `cv.drawKeyPoints()` draws small circles at the locations of key points. If the `cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS` function is added, it will draw a circle with the size of the key point and show the orientation. The SURF algorithm found 162 key points shown in Figure 8.
 <br />
 <p align="center">
-  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/?raw=true"/>
+  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/extraction_of_features_by_SURF_algorithm.jpg?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 8 Extraction of features by SURF algorithm
@@ -213,7 +213,7 @@ The code below extracts the features of the images with the ORB algorithm:
 The `cv2.ORB_create()` function is used to invoke/create the ORB algorithm. The `orb.detect()` function finds key points in images. Each key point is a special structure that has many attributes such as its coordinates (x, y), the size of a significant neighborhood, the angle that determines its orientation, the response that indicates the strength of key points, etc. Function `cv.drawKeyPoints()` draws small circles at the locations of key points. The ORB algorithm found 467 key points shown in Figure 9.
 <br />
 <p align="center">
-  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/?raw=true"/>
+  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/extraction_of_features_by_ORB_algorithm.jpg?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 9 Extraction of features by ORB algorithm
@@ -225,7 +225,7 @@ The `cv2.ORB_create()` function is used to invoke/create the ORB algorithm. The 
 Figure 10 shows a comparison of feature extraction for SIFT, SURF, and ORB algorithms.
 
 <p align="center">
-  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/?raw=true"/>
+  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/comparison_of_the_obtained_results_SIFT_SURF_ORB.jpg?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 10 Comparison of the obtained results for SIFT, SURF, and ORB
@@ -240,7 +240,7 @@ Table 1 shows the number of features found on the plastic bottle and the time re
   Table 1 Number of features and time required for feature extraction
 </i></p>
 
-<div class="center">
+<div align="center">
 <table>
     <thead>
         <tr>
@@ -322,7 +322,7 @@ The following code displays the images as input data in the form of dots, as sho
     plt.show()
 <br />
 <p align="center">
-  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/?raw=true"/>
+  <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/input_data.jpg?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 6.1 Input data
