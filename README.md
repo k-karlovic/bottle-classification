@@ -22,22 +22,26 @@ In this project, cans and bottles need to be classified using feature extraction
   - Open Git Bash 
   - Change the directory to the location wehere you want clone the directory
   - Type git clone https://github.com/k-karlovic/bottle-classification.git
+
 <br />
 
 ### 2. Download the data set
   - Go to [https://www.dropbox.com/s/0luqxkj0axpgsxo/bottles.zip?dl=0](https://www.dropbox.com/s/0luqxkj0axpgsxo/bottles.zip?dl=0)
   - Dwnload the data set
   - Unzip the file
+
 <br />
 
 ### 3.  Install Requirements
 * [Python](https://www.python.org/downloads/)
 
 To install the necessary packages in python run **`pip install -r requirements.txt`**.
+
 <br />
 
 ### 4. Run the `data_set_preparation.py` script
 Run the `data_set_preparation.py` script to save the data set in pickle format.
+
 <br />
 
 ### 5. Run the `svmn.py` script
@@ -48,34 +52,40 @@ Run the `svmn.py` script to train and test the SVM model.
 The data set includes three different categories of items. About 300 cans, plastic, and glass bottles were collected. The bottles were photographed with a webcam from the same height on a white paper that served as a substrate (Figure 1).
 
 <br />
+
 <p align="center">
   <img width="45%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/plastic_bottle_taken_with_a_webcam.jpg?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 1 Plastic bottle taken with a webcam
 </i></p>
+
 <br />
 
 The cans and bottles need to be photographed from different angles because the camera cannot capture the whole bottle from the same position. This is achieved by having each bottle rotate around its axis and thus obtain images of the bottles from different angles. The aim is to automatically recognize the cans and bottles in any form it was in the environment, which is why plastic bottles are thermally processed and thus also receive a larger set of data (Figure 2).
 
 <br />
+
 <p align="center">
   <img width="45%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/heat-treated_bottles.jpg?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 2 Heat-treated bottles
 </i></p>
+
 <br />
 
 The bottles were re-photographed from all angles, with a cap, without a cap, with a label, and without a label. It is necessary to obtain a set of data with real situations of returning bottles where the bottles can be, for example, with a cap or without a label. A script was created in Python to photograph the bottles, which immediately converts the images to black and white (Figure 3).
 
 <br />
+
 <p align="center">
   <img width="60%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/black_and_white_image_of_the_bottle.jpg?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 3 Black and white image of the bottle
 </i></p>
+
 <br />
 
 &nbsp;
@@ -83,33 +93,40 @@ The bottles were re-photographed from all angles, with a cap, without a cap, wit
 To better train the model, it is necessary to increase the data set. This is achieved by reducing noise, rotating, and blurring images. OpenCV is a package in Python that contains all these options. Images are rotated 90 degrees 3 times with the `cv2.getRotationMatrix2D()` and `cv2.warpAffine()` functions. The `cv2.getRotationMatrix2D()` function must contain the center around which it will rotate, at what angle, and whether the image remains the same or shrinks or increases. The `cv2.warpAffine()` function combines the `cv2.getRotationMatrix2D()` command with the original image and rotates the images. The image of the rotated bottle is visible in Figure 4.
 
 <br />
+
 <p align="center">
   <img width="60%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/rotated_bottle.jpg?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 4 Rotated bottle
 </i></p>
+
 <br />
 
 The `cv2.fastNlMeansDenoising()` function is used to reduce noise. The function requires the original image and parameters for filter strength, templateWindowSize (recommended 7) and searchWindowSize (recommended 21). The result of reduced noise is visible in Figure 5.
+
 <br />
-<br />
+
 <p align="center">
   <img width="60%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/reduced_noise.jpg?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 5 Reduced noise
 </i></p>
+
 <br />
+
 The function `cv2.medianBlur()` is used for blurring, which requires the original image and the parameter for blurring strength. Figure 6 shows the result of image blurring.
+
 <br />
-<br />
+
 <p align="center">
   <img width="60%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/blurring.jpg?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 6 Blurring
 </i></p>
+
 <br />
 
 After rotating, reducing noise, and blurring the images, a data set of 496 cans, 144 glass, and 7543 plastic bottles were obtained. Image manipulation scripts are attached under `rotation.py`, `noise_reduction.py`, and `blurring.py`.
@@ -126,6 +143,7 @@ The image feature extraction algorithms used in this project are:
 ### SIFT
 
 The code below extracts the features from the images with the SIFT algorithm:
+
 <br />
 
     # Adding modules
@@ -151,22 +169,26 @@ The code below extracts the features from the images with the SIFT algorithm:
     # Image display
     plt.imshow(img)
     plt.show()
+
 <br />
 
 The `cv2.xfeatures2d.SIFT_create()` function is used to invoke / create the SIFT algorithm. The `sift.detect()` function finds key points in images. Each key point is a special structure that has many attributes such as its coordinates (x, y), the size of a significant neighborhood, the angle that determines its orientation, the response that indicates the strength of key points, etc. The `cv.drawKeyPoints()` function draws small circles at key points. If the `cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS` function is added, it will draw a circle with the size of the key point and show the orientation. The SIFT algorithm found 94 key points which are shown in Figure 7.
 
 <br />
+
 <p align="center">
   <img width="70%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/extraction_of_features_by_SIFT_algorithm.jpg?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 7 Extraction of features by SIFT algorithm
 </i></p>
+
 <br />
 
 ### SURF
 
 The code below extracts the features of the images with the SURF algorithm:
+
 <br />
 
     # Adding modules
@@ -192,21 +214,25 @@ The code below extracts the features of the images with the SURF algorithm:
     # Image display
     plt.imshow(img)
     plt.show()
+
 <br />
 
 The `cv2.xfeatures2d.SURF_create()` function is used to invoke / create the SURF algorithm. The `surf.detect()` function finds key points in images. Each key point is a special structure that has many attributes such as its coordinates (x, y), the size of a significant neighborhood, the angle that determines its orientation, the response that indicates the strength of key points, etc. Function `cv.drawKeyPoints()` draws small circles at the locations of key points. If the `cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS` function is added, it will draw a circle with the size of the key point and show the orientation. The SURF algorithm found 162 key points shown in Figure 8.
 
 <br />
+
 <p align="center">
   <img width="70%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/extraction_of_features_by_SURF_algorithm.jpg?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 8 Extraction of features by SURF algorithm
 </i></p>
+
 <br />
 
 ### ORB
 The code below extracts the features of the images with the ORB algorithm:
+
 <br />
 
     # Adding modules
@@ -232,17 +258,21 @@ The code below extracts the features of the images with the ORB algorithm:
     # Image display
     plt.imshow(img)
     plt.show()
+
 <br />
 
 The `cv2.ORB_create()` function is used to invoke/create the ORB algorithm. The `orb.detect()` function finds key points in images. Each key point is a special structure that has many attributes such as its coordinates (x, y), the size of a significant neighborhood, the angle that determines its orientation, the response that indicates the strength of key points, etc. Function `cv.drawKeyPoints()` draws small circles at the locations of key points. The ORB algorithm found 467 key points shown in Figure 9.
+
 <br />
 <br />
+
 <p align="center">
   <img width="70%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/extraction_of_features_by_ORB_algorithm.jpg?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 9 Extraction of features by ORB algorithm
 </i></p>
+
 <br />
 
 ### Comparison of obtained results
@@ -250,18 +280,21 @@ The `cv2.ORB_create()` function is used to invoke/create the ORB algorithm. The 
 Figure 10 shows a comparison of feature extraction for SIFT, SURF, and ORB algorithms.
 
 <br />
+
 <p align="center">
   <img width="95%" src="https://github.com/k-karlovic/bottle-classification/blob/main/images/comparison_of_the_obtained_results_SIFT_SURF_ORB.jpg?raw=true"/>
 </p>
 <p align="center"><i>
   Figure 10 Comparison of the obtained results for SIFT, SURF, and ORB
 </i></p>
+
 <br />
 
 Figure 10 shows that when extracting features from the ORB algorithm, all key points are on the plastic bottle. This means that he best recognized the key points because it is a subject that is classified using the SVM algorithm and also gives better results when testing the SVM algorithm. 
 Table 1 shows the number of features found on the plastic bottle and the time required to extract features by SIFT, SURF, and ORB algorithms.
 
 <br />
+
 <p align="center"><i>
   Table 1 Number of features and time required for feature extraction
 </i></p>
@@ -294,6 +327,7 @@ Table 1 shows the number of features found on the plastic bottle and the time re
     </tbody>
 </table>
 </div>
+
 <br />
 
 The ORB algorithm is faster than the SIFT algorithm, but because it has found more features it also takes more time.
@@ -307,6 +341,7 @@ The system for the classification of cans and bottles using the extraction of fe
 * preparation of a data set,
 * feature extraction and
 * training and testing of features by SVM algorithm.
+
 <br />
 
 ### Preparation of a data set
@@ -314,6 +349,7 @@ The system for the classification of cans and bottles using the extraction of fe
 The collected data set (Chapter “2. Data collection and manipulation) needs to be prepared for the extraction algorithm. Each image is loaded with the "cv2.imread ()" function and reduced with the "cv2.resize ()" function. 320x240 images are saved in sheet X and the class index (0 for glass bottles, 1 for plastic bottles and 2 for cans) is saved in sheet Y. Lists X and Y are saved using the "pickle.dump ()" function in X files .pickle and Y.pickle. The code for preparing the data set is attached as "Preparation of DataSet.py".
 
 The following code displays the images as input data in the form of dots, as shown in Figure 6.1.
+
 <br />
 
     # Adding modules
@@ -348,6 +384,7 @@ The following code displays the images as input data in the form of dots, as sho
     # Saving the graph
     plt.savefig('input_datai.jpg')
     plt.show()
+
 <br />
 
 
@@ -357,6 +394,7 @@ The following code displays the images as input data in the form of dots, as sho
 <p align="center"><i>
   Figure 6.1 Input data
 </i></p>
+
 <br />
 
 ### Extraction features
@@ -365,12 +403,14 @@ The project uses 3 algorithms for extracting features, as in Chapter “4. Algor
 * SIFT,
 * SURF i
 * ORB.
+
 <br />
 
 #### SIFT
 
 The code below was used to extract the features of all the images in the data set using the SIFT algorithm.
 
+<br />
 
     def sift(img):
       """Create SIFT method to exclude features, and return kp and des"""
@@ -379,12 +419,14 @@ The code below was used to extract the features of all the images in the data se
       # Determining the number of features and features
       kp, des = sift.detectAndCompute(img,None)
       return kp, des
+
 <br />
 
 #### SURF
 
 The code below was used to extract the features of all the images in the data set using the SURF algorithm.
 
+<br />
 
     def surf(img):
       """Create SURF method to exclude features, and return kp and des"""
@@ -393,12 +435,14 @@ The code below was used to extract the features of all the images in the data se
       # Determining the number of features and features
       kp, des = surf.detectAndCompute(img,None)
       return kp, des
+
 <br />
 
 #### ORB
 
 The code below was used to extract the features of all the images in the data set using the ORB algorithm.
 
+<br />
 
     def orb(img):
       """Create ORB method to exclude features, and return kp and des"""
@@ -407,10 +451,12 @@ The code below was used to extract the features of all the images in the data se
       # Determining the number of features and features
       kp, des = orb.detectAndCompute(img,None)
       return kp, des
+
 <br />
 <br />
 
 The input must be the same size to train the SVM model, which means that the number of features for each image should be the same. This will be achieved by the following code:
+
 <br />
 
     def feature_number(feature):
@@ -439,26 +485,33 @@ The input must be the same size to train the SVM model, which means that the num
       features = ['sift', 'surf', 'orb']
       print("Algorithm time: %0.3fs" % (time() - t0))
       return list_data, ind
+
 <br />
 
 The code only accepts images that have more than 20 features.
+
 <br />
 
     if len(kp) < 20:
       continue
+
 <br />
 
 Only the first 20 features that are added to the list are taken.
+
 <br />
 
     des = des[0:20,:]
+
 <br />
 
 Before training and testing features with the SVM algorithm, it is necessary to divide the features into trained and tested data. This means that 70% of the images will be a training set and 30% a test set.
+
 <br />
 
     # Division of dataset into trained and tested data
     X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.3, random_state=42)
+
 <br />
 
 ### Training and testing of features by SVM algorithm
@@ -466,11 +519,13 @@ Before training and testing features with the SVM algorithm, it is necessary to 
 For training, it is necessary to determine parameters, such as the core and parameters C and γ. There are two variants:
 * self-testing with different parameters or
 * use the "GridSearchCV()" function - automatic search.
+
 <br />
 
 #### GridSearchCV()
 
 The following code shows the procedure for using the "GridSearchCV ()" function, which throws out clf.best_estimator_ as a result of the best parameters.
+
 <br />
 
     def svm_parameters(X_train, y_train):
@@ -485,18 +540,22 @@ The following code shows the procedure for using the "GridSearchCV ()" function,
       clf = clf.fit(X_train, y_train)
       print("Parameter finding time: %0.3fs" % (time() - t0))
       return clf.best_estimator_
+
 <br />
 
 It is defined for which training and testing algorithm "svm.SVC()" is used, and parameter ranges are defined.
+
 <br />
 
     # Parameters
       param_grid = {'C': [1e2, 1e3, 5e3, 1e4, 5e4, 1e5],
                   'gamma': [0.0001, 0.001, 0.01, 0.1], 
                   'kernel': ['linear', 'poly', 'rbf', 'sigmoid']}
+
 <br />
 
 The time to find the best parameters took more than 5 days. The results obtained are:
+
 <br />
 
     clf = svm.SVC(C=1000, cache_size=200, class_weight='balanced', coef0=0.0, decision_function_shape='ovr', 
@@ -504,12 +563,15 @@ The time to find the best parameters took more than 5 days. The results obtained
                   shrinking=True, tol=0.001, verbose=False)
 
 <br />
+
 Parameter C did not reach the minimum number given, but gamma did, which means that it is necessary to check whether the gamma less than 0.0001 gives better results. After checking, it was obtained that gamma = 1e-8 gives the best result:
+
 <br />
 
     clf = svm.SVC(C=1000, cache_size=200, class_weight='balanced', coef0=0.0, decision_function_shape='ovr', 
                   degree=3, gamma=1e-8, kernel='rbf', max_iter=-1, probability=False, random_state=None, 
                   shrinking=True, tol=0.001, verbose=False)
+
 <br />
 
 #### Testing
