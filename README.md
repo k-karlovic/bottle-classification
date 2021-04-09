@@ -2,10 +2,11 @@
 Classification of cans, plastic, and glass bottles using feature extraction and support vector machine method.
 <br />
 &nbsp;
-## Table of Contents or Overview
+## Table of Contents
 * [Summary](#summary)
 * [Setup](#setup)
-* [Data set collection and manipulation](#data-set-collection-and-manipulation)
+* [Data set collection](#data-set-collection)
+* [Data set manipulation](#data-set-manipulation)
 * [Algorithms for extracting image features](#algorithms-for-extracting-image-features)
 * [Support vector machine](#support-vector-machine)
 * [Cans and bottles classification model](#cans-and-bottles-classification-model)
